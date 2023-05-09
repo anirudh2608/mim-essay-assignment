@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
+import styled from "styled-components"
+
+import Button from "./component/button/Button.component";
+import OtpPopUp from "./component/otp-pop-up/OtpPopUp.component";
 
 function App() {
+
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false)
+
+  // Handles the OTP Pop-Up
+  const OtpPopUpHandler = () => {
+    setIsPopUpOpen(true)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <PopUpButtonContainer>
+        {
+          !isPopUpOpen && <Button onClick={OtpPopUpHandler} >Verify OTP</Button>
+        }
+      </PopUpButtonContainer>
+
+      {
+        isPopUpOpen && <OtpPopUp />
+      }
+
+    </>
   );
 }
 
 export default App;
+
+const PopUpButtonContainer = styled.div`
+width: 200px;   
+height: 150px;
+position: absolute;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+margin: auto;
+`
